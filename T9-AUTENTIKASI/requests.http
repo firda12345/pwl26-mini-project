@@ -1,0 +1,67 @@
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzk1NDg2ODEyLCJleHAiOjE3OTU0OTQwMTJ9.eGhKebHCqzRVFkWxKwNwU88YeaPDH-iE3OCyQI5Swng
+
+### 1. Register Akun
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "f1d02410126@student.unram.ac.id",
+  "password": "passwordUji123"
+}
+
+### 2. Login Akun Uji
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "firda.f1d02410126@uji.com",
+  "password": "passwordUji123"
+}
+
+### 2. Login Akun Uji
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "f1d02410126@student.unram.ac.id",
+  "password": "passwordUji123"
+}
+
+### 3. GET Resource Publik Tanpa Token
+GET {{baseUrl}}/api/books
+
+### 4. POST Resource Wajib Login Tanpa Token
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+
+{
+  "title": "Belajar Node.js Lanjut",
+  "author": "Mustafida",
+  "stock": 5
+}
+
+### 5. POST Resource Wajib Login Dengan Token (Harapan: 201 Created)
+POST {{baseUrl}}/api/books
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzk1NTE1NzI5LCJleHAiOjE3OTU1MjI5Mjl9.3_MJkeOkJCYe1WQhRHNmLW--uPENktw3OpfPB0mmo_4
+
+{
+  "title": "Belajar Node.js Lanjut",
+  "author": "Mustafida",
+  "year": 2026,
+  "price": 85000,
+  "stock": 5,
+  "publishedDate": "2026-11-24"
+}
+
+### Cek Profil Saya (Wajib Login)
+GET {{baseUrl}}/auth/saya
+Authorization: Bearer {{token}}
+
+### Percobaan 1: Token Dipalsukan 
+// saya ubah token aslinya dari e kecil jadi E kapital
+Authorization: Bearer EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzk1NDg4OTk4LCJleHAiOjE3OTU0OTYxOTh9.5uYH8VqTnQNW8pEzoTmSZR58NA40-9Zu5_6hdkV9uEw
+
+### Percobaan 2: Token Expired, Set expiresIn: '5s'
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzk1NTE2OTc4LCJleHAiOjE3OTU1MjQxNzh9.bEeRc-ojvHCVzRtv0LhL60XNSTdDCkmqotgb9aE1BNU
